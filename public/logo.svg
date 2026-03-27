@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 200" fill="none">
+  <!-- === Icon part (left) === -->
+  <!-- Main circle outline -->
+  <circle cx="95" cy="100" r="88" stroke="#1a1a1a" stroke-width="5.5" fill="none"/>
+
+  <!-- Bottom black bowl shape -->
+  <path d="M12 115 Q12 188 95 188 Q178 188 178 115 L142 115 Q138 160 95 160 Q52 160 48 115 Z" fill="#1a1a1a"/>
+
+  <!-- Upper-left black wedge -->
+  <path d="M14 78 Q8 28 52 13 L62 52 Q38 62 26 88 Z" fill="#1a1a1a"/>
+
+  <!-- Orange accent wedge -->
+  <path d="M52 13 Q72 4 88 12 L62 52 Z" fill="#E8750A"/>
+
+  <!-- Small orange dot -->
+  <circle cx="105" cy="30" r="8.5" fill="#E8750A"/>
+
+  <!-- Inner curved line (transient shape) -->
+  <path d="M48 115 Q72 48 105 42" stroke="#1a1a1a" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+
+  <!-- === Text part (right) === -->
+  <text x="210" y="95" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="62" font-weight="300" letter-spacing="-1" fill="#1a1a1a">Transient</text>
+  <text x="210" y="168" font-family="'Inter', 'Helvetica Neue', Arial, sans-serif" font-size="62" font-weight="300" letter-spacing="-1" fill="#1a1a1a">Lab.</text>
+</svg>
