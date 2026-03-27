@@ -13,6 +13,7 @@ export const metadata: Metadata = {
     siteName: "Transient Lab",
     locale: "ko_KR",
     type: "website",
+    images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Transient Lab" }],
   },
   twitter: {
     card: "summary_large_image",
