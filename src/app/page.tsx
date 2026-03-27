@@ -199,12 +199,6 @@ function Hero() {
   return (
     <section className="min-h-screen flex items-center justify-center pt-16">
       <div className="max-w-6xl mx-auto px-6 text-center">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-1.5 mb-8">
-          <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-          <span className="text-xs text-muted font-medium">2026 예비창업패키지 선정</span>
-        </div>
-
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
           Sound Innovation
           <br />
@@ -212,9 +206,7 @@ function Hero() {
         </h1>
 
         <p className="text-lg md:text-xl text-muted max-w-2xl mx-auto mb-10 leading-relaxed">
-          Transient Lab은 음원 제작의 미래를 만들어가는 스타트업입니다.
-          <br className="hidden md:block" />
-          크리에이터를 위한 혁신적인 오디오 소프트웨어를 개발합니다.
+          Transient Lab은 인간의 창작과 협업을 지원하는 오디오 소프트웨어를 개발합니다.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -409,17 +401,17 @@ function Contact() {
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <a
-              href="mailto:contact@transientlab.io"
+              href="mailto:contact@transientlab.kr"
               className="inline-flex items-center gap-3 bg-primary text-secondary px-8 py-4 rounded-full text-sm font-medium hover:bg-accent transition-colors"
             >
               <MailIcon />
-              contact@transientlab.io
+              contact@transientlab.kr
             </a>
           </div>
 
           <div className="flex items-center justify-center gap-2 mt-8 text-sm text-muted">
             <MapPinIcon />
-            <span>Seoul, South Korea</span>
+            <span>대전광역시 유성구 어은로 52번길 13 지하3호, 4호, 5호</span>
           </div>
         </div>
       </div>
