@@ -6,6 +6,19 @@ export const metadata: Metadata = {
   description:
     "Transient Lab은 인간의 창작과 협업을 지원하는 오디오 소프트웨어를 개발합니다.",
   keywords: ["Transient Lab", "MixLab", "음원 제작", "오디오 소프트웨어", "음악 협업"],
+  metadataBase: new URL("https://www.transientlab.kr"),
+  openGraph: {
+    title: "Transient Lab | Sound Innovation",
+    description: "인간의 창작과 협업을 지원하는 오디오 소프트웨어를 개발합니다.",
+    siteName: "Transient Lab",
+    locale: "ko_KR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Transient Lab | Sound Innovation",
+    description: "인간의 창작과 협업을 지원하는 오디오 소프트웨어를 개발합니다.",
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "32x32" },
