@@ -200,9 +200,9 @@ function Hero() {
     <section className="min-h-screen flex items-center justify-center pt-16">
       <div className="max-w-6xl mx-auto px-6 text-center">
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
-          Sound Innovation
+          Make Change in
           <br />
-          <span className="text-text-light">Starts Here.</span>
+          <span className="text-text-light">Music Industry</span>
         </h1>
 
         <p className="text-lg md:text-xl text-muted max-w-2xl mx-auto mb-10 leading-relaxed">
