@@ -7,7 +7,11 @@ export const metadata: Metadata = {
     "Transient Lab은 인간의 창작과 협업을 지원하는 오디오 소프트웨어를 개발합니다.",
   keywords: ["Transient Lab", "MixLab", "음원 제작", "오디오 소프트웨어", "음악 협업"],
   icons: {
-    icon: "/favicon.png",
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/favicon.png", type: "image/png" },
+    ],
+    apple: "/favicon.png",
   },
 };
 
