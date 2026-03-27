@@ -4,8 +4,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Transient Lab | Sound Innovation",
   description:
-    "음원 제작의 미래를 만들어갑니다. Transient Lab은 크리에이터를 위한 혁신적인 오디오 소프트웨어를 개발합니다.",
+    "Transient Lab은 인간의 창작과 협업을 지원하는 오디오 소프트웨어를 개발합니다.",
   keywords: ["Transient Lab", "MixLab", "음원 제작", "오디오 소프트웨어", "음악 협업"],
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
