@@ -115,8 +115,8 @@ export const CONTENT: Record<Locale, Dict> = {
           photo: "/team/hong.png",
           credentials: [
             "전기및전자공학 학부 재학",
-            "음성 · 음향 연구실",
-            "뮤직 프로덕션 과정 수료",
+            "KAIST KE 창업학회 활동",
+            "레코드팩토리 뮤직 프로덕션 과정 수료",
           ],
         },
         {
@@ -223,8 +223,8 @@ export const CONTENT: Record<Locale, Dict> = {
           photo: "/team/hong.png",
           credentials: [
             "Electrical Engineering, undergraduate",
-            "Speech & Audio Lab",
-            "Completed music production program",
+            "KAIST KE Entrepreneurship Society",
+            "Record Factory music production program",
           ],
         },
         {
