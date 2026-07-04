@@ -23,7 +23,7 @@ type Dict = {
   about: {
     headline: string[];
     body: string;
-    statCaption: string;
+    precedents: { field: string; name: string; open?: boolean }[];
     pillars: { num: string; title: string; description: string }[];
   };
   products: {
@@ -54,28 +54,29 @@ export const CONTENT: Record<Locale, Dict> = {
       ctaSecondary: "더 알아보기",
     },
     about: {
-      headline: ["여럿이 함께 만드는데,", "도구는 1인용이었습니다."],
-      body: "프로듀서, 엔지니어, 디렉터, 클라이언트가 한 곡에 참여하지만 전문가용 DAW는 혼자 쓰는 도구이고, 피드백은 카톡과 메일로 흩어집니다. 구간은 정확히 지목할 수 없고 기록도 남지 않습니다. Transient Lab은 제작에 참여하는 모두가 한 화면에서 협업하는 도구를 만듭니다.",
-      statCaption:
-        "음원 제작비가 해석 차이로 인한 소통 착오와 버전 혼선, 재작업으로 새어 나갑니다. 협업이 정리되지 않아 생기는 비용입니다.",
+      headline: ["모든 창작에는 협업의 표준이 생겼습니다.", "음악만 빼고."],
+      body: "디자인에는 Figma, 영상에는 Frame.io, 코드에는 GitHub. 창작 분야마다 함께 일하는 방식을 다시 설계한 도구가 나왔고, 그 도구들은 산업의 표준이 됐습니다. 음원 제작에는 아직 그 자리가 비어 있습니다. Transient Lab은 창작자들이 함께 만드는 방식을 바꾸고, 음악 협업의 표준을 만듭니다.",
+      precedents: [
+        { field: "디자인", name: "Figma" },
+        { field: "영상", name: "Frame.io" },
+        { field: "코드", name: "GitHub" },
+        { field: "음악", name: "아직 비어 있음", open: true },
+      ],
       pillars: [
         {
           num: "01",
-          title: "한 화면에서 함께",
-          description:
-            "전문가용 DAW와 메신저로 갈라진 작업을, 전문가와 비전문가가 같은 워크스페이스에서 함께합니다.",
+          title: "접근성",
+          description: "전문가의 도구를 누구나 쓸 수 있게. 창작 협업의 진입 장벽을 낮춥니다.",
         },
         {
           num: "02",
-          title: "말이 아니라 구간으로",
-          description:
-            "“여기 이 부분”을 말로 설명하는 대신, 웨이브폼 위 구간을 직접 지목해 타임코드로 피드백합니다.",
+          title: "자동화",
+          description: "쌓인 협업 데이터를 바탕으로, AI가 피드백 정리와 의사결정을 돕습니다.",
         },
         {
           num: "03",
-          title: "대화가 아니라 기록으로",
-          description:
-            "흩어지는 카톡·메일 대신, 피드백과 버전과 결정이 프로젝트에 기록으로 남습니다.",
+          title: "인프라",
+          description: "제작의 협업·기록·메타데이터가 한곳에 모이는, 음원 제작의 표준으로.",
         },
       ],
     },
@@ -104,7 +105,7 @@ export const CONTENT: Record<Locale, Dict> = {
           photo: "/team/lee.png",
           credentials: [
             "산업및시스템공학 · 전산 복수전공",
-            "경영과학 연구실 학부연구생",
+            "KAIST 경영전략학회 MSK 활동",
             "풀스택 · AI 개발",
           ],
         },
@@ -113,7 +114,7 @@ export const CONTENT: Record<Locale, Dict> = {
           role: "공동대표 · PO",
           photo: "/team/hong.png",
           credentials: [
-            "전기및전자공학 석사",
+            "전기및전자공학 학부 재학",
             "음성 · 음향 연구실",
             "뮤직 프로덕션 과정 수료",
           ],
@@ -123,9 +124,9 @@ export const CONTENT: Record<Locale, Dict> = {
           role: "테크 리드",
           photo: "/team/jeong.png",
           credentials: [
-            "전기및전자 석사 · SmartSoundLab",
+            "전기및전자공학 석사 · SmartSoundLab",
             "공간음향 · AI 오디오 전공",
-            "현대차 AI 연구 인턴",
+            "(전) 현대차 AI 연구 인턴",
           ],
         },
       ],
@@ -133,15 +134,11 @@ export const CONTENT: Record<Locale, Dict> = {
         { year: "2026", items: ["창업중심대학 지역기반 사업 수행"] },
         {
           year: "2025",
-          items: ["KAIST 선도 연구 프로그램 Work Station 장려상", "예비창업패키지 1차 합격"],
+          items: ["KAIST 선도 연구 프로그램 Work Station 장려상", "KAIST E*5 참가"],
         },
         {
           year: "2024",
-          items: [
-            "KAIST 문화기술대학원 창업챌린지 우수상",
-            "학생창업유망팀 300+ 성장트랙",
-            "다이노스밴드 공모전 수상",
-          ],
+          items: ["KAIST 문화기술대학원 창업챌린지 우수상", "학생창업유망팀 300+ 성장트랙"],
         },
       ],
     },
@@ -162,28 +159,32 @@ export const CONTENT: Record<Locale, Dict> = {
       ctaSecondary: "Learn More",
     },
     about: {
-      headline: ["Music is made together.", "The tools weren’t."],
-      body: "A producer, an engineer, a director, and a client all work on one track — but professional DAWs are built for one person, and feedback scatters across chat and email. You can’t point to an exact section, and nothing is kept. Transient Lab builds a tool where everyone on a project works on one screen.",
-      statCaption:
-        "of production budgets leak into miscommunication, version confusion, and rework — the cost of collaboration that never gets organized.",
+      headline: ["Every creative field has a way to collaborate.", "Except music."],
+      body: "Design has Figma. Video has Frame.io. Code has GitHub. Each craft got a tool that redesigned how people work together, and those tools became the industry standard. Music production still has an empty seat. Transient Lab is rebuilding how creators make things together — and building the standard for music collaboration.",
+      precedents: [
+        { field: "Design", name: "Figma" },
+        { field: "Video", name: "Frame.io" },
+        { field: "Code", name: "GitHub" },
+        { field: "Music", name: "Still open", open: true },
+      ],
       pillars: [
         {
           num: "01",
-          title: "Everyone on one screen",
+          title: "Access",
           description:
-            "Work split between a pro DAW and a messenger comes together — experts and non-experts in the same workspace.",
+            "Bring professional tools within everyone’s reach, and lower the barrier to creative collaboration.",
         },
         {
           num: "02",
-          title: "Point to the section, not with words",
+          title: "Automation",
           description:
-            "Instead of describing “this part right here,” mark the exact section on the waveform and leave timecoded feedback.",
+            "Turn accumulated collaboration data into AI that helps with feedback, organizing, and decisions.",
         },
         {
           num: "03",
-          title: "A record, not a conversation",
+          title: "Infrastructure",
           description:
-            "Instead of feedback scattered across chat and email, every note, version, and decision stays with the project.",
+            "Where a project’s collaboration, history, and metadata all live — the standard for music production.",
         },
       ],
     },
@@ -212,7 +213,7 @@ export const CONTENT: Record<Locale, Dict> = {
           photo: "/team/lee.png",
           credentials: [
             "Industrial & Systems Engineering · CS double major",
-            "Undergraduate researcher, Management Science Lab",
+            "KAIST Management Strategy Society (MSK)",
             "Full-stack · AI development",
           ],
         },
@@ -221,7 +222,7 @@ export const CONTENT: Record<Locale, Dict> = {
           role: "Co-CEO · PO",
           photo: "/team/hong.png",
           credentials: [
-            "M.S. Electrical Engineering",
+            "Electrical Engineering, undergraduate",
             "Speech & Audio Lab",
             "Completed music production program",
           ],
@@ -231,9 +232,9 @@ export const CONTENT: Record<Locale, Dict> = {
           role: "Tech Lead",
           photo: "/team/jeong.png",
           credentials: [
-            "M.S. EE · SmartSoundLab",
+            "M.S. Electrical Engineering · SmartSoundLab",
             "Spatial audio · AI audio",
-            "AI research intern, Hyundai Motor",
+            "Former AI research intern, Hyundai Motor",
           ],
         },
       ],
@@ -243,7 +244,7 @@ export const CONTENT: Record<Locale, Dict> = {
           year: "2025",
           items: [
             "KAIST Work Station research program — Merit Award",
-            "Pre-startup Package, first round",
+            "KAIST E*5 program",
           ],
         },
         {
@@ -251,7 +252,6 @@ export const CONTENT: Record<Locale, Dict> = {
           items: [
             "KAIST GSCT Startup Challenge — Excellence Award",
             "Student Startup Promising Team 300+ growth track",
-            "Dinos Band competition award",
           ],
         },
       ],

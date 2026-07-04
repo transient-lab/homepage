@@ -188,7 +188,7 @@ function Navbar() {
 function Hero() {
   const { t } = useLang();
   return (
-    <section className="min-h-screen flex items-center justify-center pt-16">
+    <section className="min-h-[78vh] flex items-center justify-center pt-16 pb-16">
       <div className="max-w-6xl mx-auto px-6 text-center">
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
           Make Change in
@@ -196,7 +196,7 @@ function Hero() {
           <span className="text-text-light">Music Industry</span>
         </h1>
 
-        <p className="text-lg md:text-xl text-muted max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p className="text-lg md:text-xl text-muted max-w-2xl mx-auto mb-8 leading-relaxed">
           {t.hero.subtitle}
         </p>
 
@@ -225,10 +225,10 @@ function Hero() {
 function About() {
   const { t } = useLang();
   return (
-    <section id="about" className="py-32 bg-bg-alt">
+    <section id="about" className="py-20 md:py-24 bg-bg-alt">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section header */}
-        <div className="max-w-2xl mb-16">
+        <div className="max-w-2xl mb-12">
           <p className="text-xs font-semibold tracking-widest text-muted uppercase mb-3">About Us</p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
             <Lines lines={t.about.headline} />
@@ -236,10 +236,21 @@ function About() {
           <p className="text-muted leading-relaxed">{t.about.body}</p>
         </div>
 
-        {/* Stat */}
-        <div className="mb-16 border-t border-border pt-10 flex flex-col sm:flex-row sm:items-baseline gap-3 sm:gap-8">
-          <span className="text-5xl md:text-6xl font-bold tracking-tight leading-none">~5%</span>
-          <p className="text-muted leading-relaxed max-w-md">{t.about.statCaption}</p>
+        {/* Category precedents */}
+        <div className="mb-12 border-t border-border pt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {t.about.precedents.map((p) => (
+            <div
+              key={p.field}
+              className={`rounded-2xl border p-5 ${
+                p.open ? "bg-bg-dark text-white border-transparent" : "bg-white border-border"
+              }`}
+            >
+              <p className={`text-xs font-medium mb-2 ${p.open ? "text-white/50" : "text-muted"}`}>
+                {p.field}
+              </p>
+              <p className="text-lg font-semibold">{p.name}</p>
+            </div>
+          ))}
         </div>
 
         {/* Pillars */}
@@ -247,7 +258,7 @@ function About() {
           {t.about.pillars.map((pillar) => (
             <div
               key={pillar.num}
-              className="group p-8 bg-white rounded-2xl border border-border hover:border-primary transition-colors"
+              className="group p-6 bg-white rounded-2xl border border-border hover:border-primary transition-colors"
             >
               <span className="text-sm font-semibold text-muted">{pillar.num}</span>
               <h3 className="text-xl font-semibold mt-3 mb-3">{pillar.title}</h3>
@@ -265,9 +276,9 @@ function About() {
 function Products() {
   const { t } = useLang();
   return (
-    <section id="products" className="py-32">
+    <section id="products" className="py-20 md:py-24">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="max-w-2xl mb-20">
+        <div className="max-w-2xl mb-12">
           <p className="text-xs font-semibold tracking-widest text-muted uppercase mb-3">Products</p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
             <Lines lines={t.products.headline} />
@@ -275,12 +286,12 @@ function Products() {
         </div>
 
         {/* MixLab */}
-        <div className="relative p-8 md:p-12 rounded-2xl bg-bg-dark text-white">
+        <div className="relative p-8 md:p-10 rounded-2xl bg-bg-dark text-white">
           <span className="inline-block text-xs font-medium px-3 py-1 rounded-full mb-6 bg-white/10 text-white/70">
             {t.products.badge}
           </span>
 
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
             <div>
               <h3 className="text-2xl md:text-3xl font-bold mb-2">MixLab</h3>
               <p className="text-sm text-white/60 mb-5">{t.products.tagline}</p>
@@ -317,9 +328,9 @@ function Products() {
 function Team() {
   const { t } = useLang();
   return (
-    <section id="team" className="py-32 bg-bg-alt">
+    <section id="team" className="py-20 md:py-24 bg-bg-alt">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="max-w-2xl mb-20">
+        <div className="max-w-2xl mb-12">
           <p className="text-xs font-semibold tracking-widest text-muted uppercase mb-3">Team</p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">{t.team.headline}</h2>
           <p className="text-muted leading-relaxed">{t.team.intro}</p>
@@ -358,7 +369,7 @@ function Team() {
         </div>
 
         {/* Track record */}
-        <div className="mt-16 border-t border-border pt-10">
+        <div className="mt-12 border-t border-border pt-8">
           <p className="text-xs font-semibold tracking-widest text-muted uppercase mb-8">Track Record</p>
           <div className="space-y-6">
             {t.team.trackRecord.map((row) => (
@@ -385,7 +396,7 @@ function Team() {
 function Contact() {
   const { t } = useLang();
   return (
-    <section id="contact" className="py-32">
+    <section id="contact" className="py-20 md:py-24">
       <div className="max-w-6xl mx-auto px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-xs font-semibold tracking-widest text-muted uppercase mb-3">Contact</p>
