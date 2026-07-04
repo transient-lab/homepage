@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import Image from "next/image";
+import { LanguageProvider, useLang, type Locale } from "./i18n";
 
 /* ───────────────────────── Data ───────────────────────── */
 
@@ -12,64 +13,24 @@ const NAV_LINKS = [
   { label: "Contact", href: "#contact" },
 ];
 
-const PRODUCTS = [
-  {
-    name: "MixLab",
-    tagline: "음원 제작 분야의 GitHub",
-    description:
-      "멀티트랙 기반 실시간 협업, 버전 관리와 AB 테스트, 전문 오디오 미터링까지. 음원 제작의 모든 워크플로우를 하나의 플랫폼에서.",
-    features: ["실시간 멀티트랙 협업", "버전 관리 & AB 테스트", "프로 오디오 미터링", "멤버 권한 관리"],
-    status: "Coming Soon",
-    link: "https://mixlab.co.kr",
-  },
-  {
-    name: "Coming Next",
-    tagline: "다음 혁신을 준비하고 있습니다",
-    description:
-      "Transient Lab은 오디오 크리에이터를 위한 더 많은 도구를 개발하고 있습니다. 새로운 제품 소식을 가장 먼저 받아보세요.",
-    features: [],
-    status: "In Development",
-    link: "",
-  },
-];
+const MIXLAB_LINK = "https://mixlab.co.kr";
+const CONTACT_EMAIL = "contact@transientlab.kr";
 
-const TEAM = [
-  {
-    name: "팀원 1",
-    role: "CEO / Product",
-    description: "제품 비전과 전략을 이끌어갑니다.",
-  },
-  {
-    name: "팀원 2",
-    role: "CTO / Engineering",
-    description: "기술 아키텍처와 개발을 총괄합니다.",
-  },
-  {
-    name: "팀원 3",
-    role: "Design / UX",
-    description: "사용자 경험과 인터페이스를 디자인합니다.",
-  },
-  {
-    name: "팀원 4",
-    role: "Audio Engine",
-    description: "핵심 오디오 엔진을 개발합니다.",
-  },
-];
+/* ───────────────────────── Helpers ────────────────────── */
 
-const VALUES = [
-  {
-    title: "Craft",
-    description: "우리는 소리를 다루는 크리에이터입니다. 모든 디테일에 장인 정신을 담습니다.",
-  },
-  {
-    title: "Collaborate",
-    description: "혼자보다 함께 만드는 음악이 더 위대합니다. 협업의 장벽을 없앱니다.",
-  },
-  {
-    title: "Innovate",
-    description: "기존의 방식에 안주하지 않습니다. 기술로 창작의 새로운 가능성을 엽니다.",
-  },
-];
+// Render an array of strings as lines separated by <br/>.
+function Lines({ lines }: { lines: string[] }) {
+  return (
+    <>
+      {lines.map((line, i) => (
+        <Fragment key={i}>
+          {i > 0 && <br />}
+          {line}
+        </Fragment>
+      ))}
+    </>
+  );
+}
 
 /* ───────────────────────── Icons ──────────────────────── */
 
@@ -127,9 +88,34 @@ function MapPinIcon() {
   );
 }
 
+/* ─────────────────────── Language toggle ──────────────── */
+
+const LOCALES: Locale[] = ["ko", "en"];
+
+function LangToggle() {
+  const { locale, setLocale } = useLang();
+  return (
+    <div className="inline-flex items-center rounded-full border border-border p-0.5 text-xs font-medium">
+      {LOCALES.map((l) => (
+        <button
+          key={l}
+          onClick={() => setLocale(l)}
+          aria-pressed={locale === l}
+          className={`px-2.5 py-1 rounded-full transition-colors ${
+            locale === l ? "bg-primary text-secondary" : "text-muted hover:text-primary"
+          }`}
+        >
+          {l.toUpperCase()}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 /* ───────────────────────── Navbar ─────────────────────── */
 
 function Navbar() {
+  const { t } = useLang();
   const [open, setOpen] = useState(false);
 
   return (
@@ -151,18 +137,22 @@ function Navbar() {
               {link.label}
             </a>
           ))}
+          <LangToggle />
           <a
             href="#contact"
             className="text-sm bg-primary text-secondary px-4 py-2 rounded-full hover:bg-accent transition-colors"
           >
-            Get in Touch
+            {t.nav.cta}
           </a>
         </div>
 
-        {/* Mobile toggle */}
-        <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
-          {open ? <CloseIcon /> : <MenuIcon />}
-        </button>
+        {/* Mobile actions */}
+        <div className="flex items-center gap-3 md:hidden">
+          <LangToggle />
+          <button onClick={() => setOpen(!open)} aria-label="Menu">
+            {open ? <CloseIcon /> : <MenuIcon />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -184,7 +174,7 @@ function Navbar() {
               onClick={() => setOpen(false)}
               className="text-sm bg-primary text-secondary px-4 py-2 rounded-full text-center hover:bg-accent transition-colors"
             >
-              Get in Touch
+              {t.nav.cta}
             </a>
           </div>
         </div>
@@ -196,6 +186,7 @@ function Navbar() {
 /* ───────────────────────── Hero ──────────────────────── */
 
 function Hero() {
+  const { t } = useLang();
   return (
     <section className="min-h-screen flex items-center justify-center pt-16">
       <div className="max-w-6xl mx-auto px-6 text-center">
@@ -206,7 +197,7 @@ function Hero() {
         </h1>
 
         <p className="text-lg md:text-xl text-muted max-w-2xl mx-auto mb-10 leading-relaxed">
-          Transient Lab은 인간의 창작과 협업을 지원하는 오디오 소프트웨어를 개발합니다.
+          {t.hero.subtitle}
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -214,14 +205,14 @@ function Hero() {
             href="#products"
             className="inline-flex items-center justify-center gap-2 bg-primary text-secondary px-8 py-3.5 rounded-full text-sm font-medium hover:bg-accent transition-colors"
           >
-            제품 둘러보기
+            {t.hero.ctaPrimary}
             <ArrowRightIcon />
           </a>
           <a
             href="#about"
             className="inline-flex items-center justify-center gap-2 border border-border px-8 py-3.5 rounded-full text-sm font-medium hover:bg-bg-alt transition-colors"
           >
-            더 알아보기
+            {t.hero.ctaSecondary}
           </a>
         </div>
       </div>
@@ -232,32 +223,35 @@ function Hero() {
 /* ───────────────────────── About ─────────────────────── */
 
 function About() {
+  const { t } = useLang();
   return (
     <section id="about" className="py-32 bg-bg-alt">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section header */}
-        <div className="max-w-2xl mb-20">
+        <div className="max-w-2xl mb-16">
           <p className="text-xs font-semibold tracking-widest text-muted uppercase mb-3">About Us</p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
-            소리에 진심인 사람들이
-            <br />
-            모여 만듭니다.
+            <Lines lines={t.about.headline} />
           </h2>
-          <p className="text-muted leading-relaxed">
-            Transient Lab은 음악과 기술의 교차점에서 태어났습니다. 음원 제작 현장의 불편함을 직접 겪은
-            크리에이터들이 모여, 더 나은 협업과 창작 환경을 만들기 위해 시작했습니다.
-          </p>
+          <p className="text-muted leading-relaxed">{t.about.body}</p>
         </div>
 
-        {/* Values */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {VALUES.map((value) => (
+        {/* Stat */}
+        <div className="mb-16 border-t border-border pt-10 flex flex-col sm:flex-row sm:items-baseline gap-3 sm:gap-8">
+          <span className="text-5xl md:text-6xl font-bold tracking-tight leading-none">~5%</span>
+          <p className="text-muted leading-relaxed max-w-md">{t.about.statCaption}</p>
+        </div>
+
+        {/* Pillars */}
+        <div className="grid md:grid-cols-3 gap-6">
+          {t.about.pillars.map((pillar) => (
             <div
-              key={value.title}
+              key={pillar.num}
               className="group p-8 bg-white rounded-2xl border border-border hover:border-primary transition-colors"
             >
-              <h3 className="text-xl font-semibold mb-3">{value.title}</h3>
-              <p className="text-sm text-muted leading-relaxed">{value.description}</p>
+              <span className="text-sm font-semibold text-muted">{pillar.num}</span>
+              <h3 className="text-xl font-semibold mt-3 mb-3">{pillar.title}</h3>
+              <p className="text-sm text-muted leading-relaxed">{pillar.description}</p>
             </div>
           ))}
         </div>
@@ -269,74 +263,49 @@ function About() {
 /* ──────────────────────── Products ────────────────────── */
 
 function Products() {
+  const { t } = useLang();
   return (
     <section id="products" className="py-32">
       <div className="max-w-6xl mx-auto px-6">
         <div className="max-w-2xl mb-20">
           <p className="text-xs font-semibold tracking-widest text-muted uppercase mb-3">Products</p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
-            크리에이터를 위한
-            <br />
-            도구를 만듭니다.
+            <Lines lines={t.products.headline} />
           </h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          {PRODUCTS.map((product, i) => (
-            <div
-              key={product.name}
-              className={`relative p-8 md:p-10 rounded-2xl border transition-colors ${
-                i === 0
-                  ? "bg-bg-dark text-white border-transparent"
-                  : "bg-bg-alt border-border border-dashed"
-              }`}
-            >
-              {/* Status badge */}
-              <span
-                className={`inline-block text-xs font-medium px-3 py-1 rounded-full mb-6 ${
-                  i === 0 ? "bg-white/10 text-white/70" : "bg-white text-muted"
-                }`}
+        {/* MixLab */}
+        <div className="relative p-8 md:p-12 rounded-2xl bg-bg-dark text-white">
+          <span className="inline-block text-xs font-medium px-3 py-1 rounded-full mb-6 bg-white/10 text-white/70">
+            {t.products.badge}
+          </span>
+
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16">
+            <div>
+              <h3 className="text-2xl md:text-3xl font-bold mb-2">MixLab</h3>
+              <p className="text-sm text-white/60 mb-5">{t.products.tagline}</p>
+              <p className="text-sm text-white/80 leading-relaxed mb-8">{t.products.description}</p>
+
+              <a
+                href={MIXLAB_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-medium bg-white text-black px-5 py-2.5 rounded-full hover:bg-white/90 transition-colors"
               >
-                {product.status}
-              </span>
-
-              <h3 className="text-2xl md:text-3xl font-bold mb-2">{product.name}</h3>
-              <p className={`text-sm mb-4 ${i === 0 ? "text-white/60" : "text-muted"}`}>
-                {product.tagline}
-              </p>
-              <p className={`text-sm leading-relaxed mb-6 ${i === 0 ? "text-white/80" : "text-muted"}`}>
-                {product.description}
-              </p>
-
-              {product.features.length > 0 && (
-                <ul className="space-y-2">
-                  {product.features.map((feat) => (
-                    <li
-                      key={feat}
-                      className={`flex items-center gap-2 text-sm ${
-                        i === 0 ? "text-white/70" : "text-muted"
-                      }`}
-                    >
-                      <CheckIcon />
-                      {feat}
-                    </li>
-                  ))}
-                </ul>
-              )}
-
-              {product.link && (
-                <a
-                  href={product.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 mt-6 text-sm font-medium bg-white text-black px-5 py-2.5 rounded-full hover:bg-white/90 transition-colors"
-                >
-                  자세히 보기
-                  <ArrowRightIcon />
-                </a>
-              )}
+                {t.products.cta}
+                <ArrowRightIcon />
+              </a>
             </div>
-          ))}
+
+            <ul className="space-y-3 lg:pt-1">
+              {t.products.features.map((feat) => (
+                <li key={feat} className="flex items-center gap-3 text-sm text-white/80">
+                  <CheckIcon />
+                  {feat}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -346,36 +315,65 @@ function Products() {
 /* ────────────────────────── Team ──────────────────────── */
 
 function Team() {
+  const { t } = useLang();
   return (
     <section id="team" className="py-32 bg-bg-alt">
       <div className="max-w-6xl mx-auto px-6">
         <div className="max-w-2xl mb-20">
           <p className="text-xs font-semibold tracking-widest text-muted uppercase mb-3">Team</p>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
-            함께 만드는 사람들
-          </h2>
-          <p className="text-muted leading-relaxed">
-            음악, 오디오 엔지니어링, 소프트웨어 개발 — 다양한 분야의 전문가들이 하나의 목표를 향해 나아갑니다.
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">{t.team.headline}</h2>
+          <p className="text-muted leading-relaxed">{t.team.intro}</p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {TEAM.map((member) => (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {t.team.members.map((member) => (
             <div
               key={member.name}
               className="group p-6 bg-white rounded-2xl border border-border hover:border-primary transition-colors"
             >
-              {/* Avatar placeholder */}
-              <div className="w-14 h-14 bg-bg-dark rounded-full mb-4 flex items-center justify-center">
-                <span className="text-white text-lg font-semibold">
-                  {member.name.charAt(0)}
-                </span>
+              <div className="flex items-center gap-4 mb-5">
+                <div className="relative w-16 h-20 rounded-xl overflow-hidden bg-bg-alt shrink-0">
+                  <Image
+                    src={member.photo}
+                    alt={member.name}
+                    fill
+                    sizes="64px"
+                    className="object-cover object-top grayscale"
+                  />
+                </div>
+                <div>
+                  <h3 className="font-semibold leading-tight">{member.name}</h3>
+                  <p className="text-xs text-muted font-medium mt-1">{member.role}</p>
+                </div>
               </div>
-              <h3 className="font-semibold mb-1">{member.name}</h3>
-              <p className="text-xs text-muted font-medium mb-3">{member.role}</p>
-              <p className="text-sm text-muted">{member.description}</p>
+              <ul className="space-y-1.5">
+                {member.credentials.map((c) => (
+                  <li key={c} className="text-sm text-muted leading-snug">
+                    {c}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
+        </div>
+
+        {/* Track record */}
+        <div className="mt-16 border-t border-border pt-10">
+          <p className="text-xs font-semibold tracking-widest text-muted uppercase mb-8">Track Record</p>
+          <div className="space-y-6">
+            {t.team.trackRecord.map((row) => (
+              <div key={row.year} className="grid grid-cols-[4rem_1fr] gap-4 sm:gap-8">
+                <span className="text-sm font-semibold">{row.year}</span>
+                <ul className="space-y-1.5">
+                  {row.items.map((item) => (
+                    <li key={item} className="text-sm text-muted leading-snug">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -385,33 +383,30 @@ function Team() {
 /* ──────────────────────── Contact ─────────────────────── */
 
 function Contact() {
+  const { t } = useLang();
   return (
     <section id="contact" className="py-32">
       <div className="max-w-6xl mx-auto px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-xs font-semibold tracking-widest text-muted uppercase mb-3">Contact</p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
-            함께하고 싶다면
-            <br />
-            언제든 연락주세요.
+            <Lines lines={t.contact.headline} />
           </h2>
-          <p className="text-muted leading-relaxed mb-12">
-            투자, 협업, 채용 등 어떤 이야기든 환영합니다.
-          </p>
+          <p className="text-muted leading-relaxed mb-12">{t.contact.body}</p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <a
-              href="mailto:contact@transientlab.kr"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="inline-flex items-center gap-3 bg-primary text-secondary px-8 py-4 rounded-full text-sm font-medium hover:bg-accent transition-colors"
             >
               <MailIcon />
-              contact@transientlab.kr
+              {CONTACT_EMAIL}
             </a>
           </div>
 
           <div className="flex items-center justify-center gap-2 mt-8 text-sm text-muted">
             <MapPinIcon />
-            <span>대전광역시 유성구 어은로 52번길 13 지하3호, 4호, 5호</span>
+            <span>{t.contact.address}</span>
           </div>
         </div>
       </div>
@@ -428,7 +423,9 @@ function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div>
             <Image src="/logo.webp" alt="Transient Lab" width={140} height={36} className="h-7 w-auto mb-2" />
-            <p className="text-xs text-muted">&copy; {new Date().getFullYear()} Transient Lab. All rights reserved.</p>
+            <p className="text-xs text-muted">
+              &copy; {new Date().getFullYear()} Transient Lab. All rights reserved.
+            </p>
           </div>
 
           <div className="flex items-center gap-6">
@@ -452,7 +449,7 @@ function Footer() {
 
 export default function Home() {
   return (
-    <>
+    <LanguageProvider>
       <Navbar />
       <main>
         <Hero />
@@ -462,6 +459,6 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </LanguageProvider>
   );
 }
