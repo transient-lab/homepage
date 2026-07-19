@@ -49,7 +49,7 @@ export const CONTENT: Record<Locale, Dict> = {
     nav: { cta: "문의하기" },
     hero: {
       subtitle:
-        "Transient Lab은 인간의 창작과 협업을 지원하는 오디오 소프트웨어를 개발합니다.",
+        "음악을 함께 만드는 방식을 바꿉니다.\nTransient Lab은 음원 제작 협업을 위한 플랫폼을 만듭니다.",
       ctaPrimary: "제품 둘러보기",
       ctaSecondary: "더 알아보기",
     },
@@ -81,23 +81,23 @@ export const CONTENT: Record<Locale, Dict> = {
       ],
     },
     products: {
-      headline: ["크리에이터를 위한", "도구를 만듭니다."],
+      headline: ["여럿이 함께 만드는데,", "도구는 1인용이었습니다."],
       badge: "베타 준비 중",
       tagline: "멀티트랙 협업 워크스페이스",
       description:
         "여러 트랙을 클라우드에 올리고, 웨이브폼과 프로 미터링을 보며 구간을 지목해 피드백을 남깁니다. 수정은 버전으로 반영되고, 전체 믹스와 개별 트랙을 A/B로 비교합니다.",
       features: [
         "구간별 타임코드 피드백",
-        "멀티트랙 · 프로 오디오 미터링",
-        "버전 관리 & 끊김 없는 A/B",
-        "멤버 권한 관리 (Owner / Editor / Viewer)",
+        "멀티트랙 · 프로 미터링",
+        "버전 관리 · 끊김 없는 A/B 테스트",
+        "역할별 권한 관리 (Owner / Editor / Viewer)",
       ],
       cta: "자세히 보기",
     },
     team: {
       headline: "함께 만드는 사람들",
       intro:
-        "음악 · 음향 도메인부터 AI · 풀스택 개발까지 — KAIST에서 만난 세 사람이 함께합니다.",
+        "음악 · 음향부터 AI · 풀스택 개발까지, KAIST 밴드 동아리에서 만난 세 사람이 함께합니다.",
       members: [
         {
           name: "이서진",
@@ -154,7 +154,7 @@ export const CONTENT: Record<Locale, Dict> = {
     nav: { cta: "Get in Touch" },
     hero: {
       subtitle:
-        "Transient Lab builds audio software for human creativity and collaboration.",
+        "Changing how music gets made together.\nTransient Lab builds the collaboration platform for music production.",
       ctaPrimary: "Explore Products",
       ctaSecondary: "Learn More",
     },
@@ -189,23 +189,23 @@ export const CONTENT: Record<Locale, Dict> = {
       ],
     },
     products: {
-      headline: ["We build tools", "for creators."],
+      headline: ["Made by many.", "Built for one."],
       badge: "Beta coming soon",
       tagline: "A multitrack collaboration workspace",
       description:
         "Upload your tracks to the cloud, watch the waveform and pro metering, and mark a section to leave feedback. Revisions come back as versions, and you can A/B the full mix or any single track.",
       features: [
         "Section-level timecoded feedback",
-        "Multitrack · pro audio metering",
-        "Version control & seamless A/B",
-        "Member roles (Owner / Editor / Viewer)",
+        "Multitrack · pro metering",
+        "Version control · seamless A/B testing",
+        "Role-based permissions (Owner / Editor / Viewer)",
       ],
       cta: "Learn more",
     },
     team: {
       headline: "The people behind it",
       intro:
-        "From music and audio to AI and full-stack engineering — three people who met at KAIST.",
+        "From music and audio to AI and full-stack engineering — three people who met in a KAIST band club.",
       members: [
         {
           name: "Lee Seojin",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, Fragment } from "react";
+import { useState, useEffect, useRef, Fragment, type ReactNode } from "react";
 import Image from "next/image";
 import { LanguageProvider, useLang, type Locale } from "./i18n";
 
@@ -17,6 +17,37 @@ const MIXLAB_LINK = "https://mixlab.co.kr";
 const CONTACT_EMAIL = "contact@transientlab.kr";
 
 /* ───────────────────────── Helpers ────────────────────── */
+
+// Reveal children with a subtle fade + rise the first time they scroll into view.
+function Reveal({ children, className }: { children: ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [shown, setShown] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShown(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className={`reveal${shown ? " is-visible" : ""}${className ? " " + className : ""}`}
+    >
+      {children}
+    </div>
+  );
+}
 
 // Render an array of strings as lines separated by <br/>.
 function Lines({ lines }: { lines: string[] }) {
@@ -140,7 +171,7 @@ function Navbar() {
           <LangToggle />
           <a
             href="#contact"
-            className="text-sm bg-primary text-secondary px-4 py-2 rounded-full hover:bg-accent transition-colors"
+            className="inline-flex items-center justify-center min-w-[8.5rem] text-sm bg-primary text-secondary px-4 py-2 rounded-full hover:bg-accent transition-colors"
           >
             {t.nav.cta}
           </a>
@@ -188,15 +219,15 @@ function Navbar() {
 function Hero() {
   const { t } = useLang();
   return (
-    <section className="min-h-[78vh] flex items-center justify-center pt-16 pb-16">
-      <div className="max-w-6xl mx-auto px-6 text-center">
+    <section className="min-h-dvh flex items-center justify-center pt-16 pb-16">
+      <Reveal className="max-w-6xl mx-auto px-6 text-center">
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] mb-6">
           Make Change in
           <br />
           <span className="text-text-light">Music Industry</span>
         </h1>
 
-        <p className="text-lg md:text-xl text-muted max-w-2xl mx-auto mb-8 leading-relaxed">
+        <p className="text-lg md:text-xl text-muted max-w-2xl mx-auto mb-8 leading-relaxed whitespace-pre-line">
           {t.hero.subtitle}
         </p>
 
@@ -215,7 +246,7 @@ function Hero() {
             {t.hero.ctaSecondary}
           </a>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
@@ -226,7 +257,7 @@ function About() {
   const { t } = useLang();
   return (
     <section id="about" className="py-20 md:py-24 bg-bg-alt">
-      <div className="max-w-6xl mx-auto px-6">
+      <Reveal className="max-w-6xl mx-auto px-6">
         {/* Section header */}
         <div className="max-w-2xl mb-12">
           <p className="text-xs font-semibold tracking-widest text-muted uppercase mb-3">About Us</p>
@@ -266,7 +297,7 @@ function About() {
             </div>
           ))}
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
@@ -277,7 +308,7 @@ function Products() {
   const { t } = useLang();
   return (
     <section id="products" className="py-20 md:py-24">
-      <div className="max-w-6xl mx-auto px-6">
+      <Reveal className="max-w-6xl mx-auto px-6">
         <div className="max-w-2xl mb-12">
           <p className="text-xs font-semibold tracking-widest text-muted uppercase mb-3">Products</p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
@@ -318,7 +349,7 @@ function Products() {
             </ul>
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
@@ -329,7 +360,7 @@ function Team() {
   const { t } = useLang();
   return (
     <section id="team" className="py-20 md:py-24 bg-bg-alt">
-      <div className="max-w-6xl mx-auto px-6">
+      <Reveal className="max-w-6xl mx-auto px-6">
         <div className="max-w-2xl mb-12">
           <p className="text-xs font-semibold tracking-widest text-muted uppercase mb-3">Team</p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">{t.team.headline}</h2>
@@ -386,7 +417,7 @@ function Team() {
             ))}
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
@@ -397,7 +428,7 @@ function Contact() {
   const { t } = useLang();
   return (
     <section id="contact" className="py-20 md:py-24">
-      <div className="max-w-6xl mx-auto px-6">
+      <Reveal className="max-w-6xl mx-auto px-6">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-xs font-semibold tracking-widest text-muted uppercase mb-3">Contact</p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-6">
@@ -420,7 +451,7 @@ function Contact() {
             <span>{t.contact.address}</span>
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }
