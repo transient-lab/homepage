@@ -49,7 +49,7 @@ export const CONTENT: Record<Locale, Dict> = {
     nav: { cta: "문의하기" },
     hero: {
       subtitle:
-        "음악을 함께 만드는 방식을 바꿉니다.\nTransient Lab은 음원 제작 협업을 위한 플랫폼을 만듭니다.",
+        "음악을 함께 만드는 방식을 바꿉니다.\nTransient Lab은 인간의 창작과 협업을 지원하는 오디오 소프트웨어를 개발합니다.",
       ctaPrimary: "제품 둘러보기",
       ctaSecondary: "더 알아보기",
     },
@@ -154,7 +154,7 @@ export const CONTENT: Record<Locale, Dict> = {
     nav: { cta: "Get in Touch" },
     hero: {
       subtitle:
-        "Changing how music gets made together.\nTransient Lab builds the collaboration platform for music production.",
+        "Changing how music gets made together.\nTransient Lab builds audio software for human creativity and collaboration.",
       ctaPrimary: "Explore Products",
       ctaSecondary: "Learn More",
     },
